@@ -19,19 +19,20 @@ This skill enables you to:
 
 ---
 
-## The 7 Rules of a Great Git Commit Message
+## The 8 Rules of a Great Git Commit Message
 
 Every commit message must be evaluated against these rules:
 
-| # | Rule | Details |
-|---|------|---------|
-| 1 | **Separate subject from body with a blank line** | The blank line is critical — tools like `log`, `shortlog`, and `rebase` break without it |
-| 2 | **Limit the subject line to 50 characters** | 50 is the target; 72 is the hard maximum (GitHub truncates beyond 72 with an ellipsis) |
-| 3 | **Capitalize the subject line** | First word must start with a capital letter |
-| 4 | **Do not end the subject line with a period** | No trailing punctuation — space is precious |
-| 5 | **Use the imperative mood in the subject line** | "Fix bug" not "Fixed bug" or "Fixing bug". Test: "If applied, this commit will _____" |
-| 6 | **Wrap the body at 72 characters** | Git never wraps text automatically — do it manually |
-| 7 | **Use the body to explain *what* and *why*, not *how*** | The code explains how; the message should explain the reasoning and context |
+| # | Rule                                              | Details                                                                                  |
+|---|---------------------------------------------------|------------------------------------------------------------------------------------------|
+| 1 | **Separate subject from body with a blank line**  | The blank line is critical — tools like `log`, `shortlog`, and `rebase` break without it |
+| 2 | **Limit the subject line to 50 characters**       | 50 is the target; 72 is the hard maximum (GitHub truncates beyond 72 with an ellipsis)   |
+| 3 | **Capitalize the subject line**                   | First word must start with a capital letter                                              |
+| 4 | **Do not end the subject line with a period**     | No trailing punctuation — space is precious                                              |
+| 5 | **Use the imperative mood in the subject line**   | "Fix bug" not "Fixed bug" or "Fixing bug". Test: "If applied, this commit will _____"    |
+| 6 | **Wrap the body at 72 characters**                | Git never wraps text automatically — do it manually                                      |
+| 7 | **Use the body to explain *what*, not *how***     | The code explains how; the message should explain the change                             |
+| 8 | **Use the body to also explain *why*, not *how*** | The code explains how; the message should explain the reason for the change              |
 
 ---
 
@@ -51,8 +52,9 @@ A subject line passes if it completes this sentence naturally:
 ```
 Short imperative summary in ~50 chars (72 max)
 <blank line>
-More detailed explanation of WHY the change was made. Wrap lines at
-72 characters. Focus on the problem being solved, not the solution.
+More detailed explanation of WHAT and also WHY the change was made. 
+Wrap lines at 72 characters. Focus on the problem being solved, 
+not the solution.
 Are there side effects or unintuitive consequences? Explain them here.
 
 Further paragraphs come after blank lines.
@@ -124,8 +126,12 @@ For each of the 7 rules, report:
 - If a body is present, are all lines ≤72 characters?
 - Check every line individually
 
-**Rule 7 — Body content (what/why, not how):**
-- Does the body (if present) focus on the reason for the change and its context?
+**Rule 7 — Body content (what, not how):**
+- Does the body (if present) explain "what" changed?
+- If it describes implementation details that are obvious from the code, flag it
+
+**Rule 8 — Body content (why, not how):**
+- Does the body (if present) explain "why" the change was made?
 - If it describes implementation details that are obvious from the code, flag it
 
 ---
@@ -141,14 +147,16 @@ When giving feedback:
 
 ### Suggestion Templates
 
-| Issue | Example Suggestion |
-|-------|--------------------|
-| Past tense subject | Change "Fixed null pointer in auth" → "Fix null pointer in auth" |
-| Period at end | Remove trailing period: "Update README." → "Update README" |
-| Subject too long | Condense: "Add validation for email field in the user registration form" (60 chars) → "Add email validation to user registration" (41 chars) |
-| Missing blank line | Insert a blank line between subject and first body line |
-| Body explains how | Replace implementation details with problem context and rationale |
-| No capitalization | Capitalize first word: "add retry logic" → "Add retry logic" |
+| Issue                                | Example Suggestion                                                                                                                           |
+|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| Past tense subject                   | Change "Fixed null pointer in auth" → "Fix null pointer in auth"                                                                             |
+| Period at end                        | Remove trailing period: "Update README." → "Update README"                                                                                   |
+| Subject too long                     | Condense: "Add validation for email field in the user registration form" (60 chars) → "Add email validation to user registration" (41 chars) |
+| Missing blank line                   | Insert a blank line between subject and first body line                                                                                      |
+| Body explains how                    | Replace implementation details with problem context and rationale                                                                            |
+| No capitalization                    | Capitalize first word: "add retry logic" → "Add retry logic"                                                                                 |
+| Body does not explain what changed   | Replace details to answer the question - what changed?                                                                                       |
+| Body does not explain why the change | Replace details to answer the question - why the change happened?                                                                            |
 
 ---
 
@@ -163,7 +171,7 @@ on refresh. This happened because the token parser assumed all fields
 were present, which was valid under the old auth service but not the
 new one deployed in v2.4.
 
-Resolves: #891
+References: #891
 ```
 
 ### ❌ Poor (multiple violations)
